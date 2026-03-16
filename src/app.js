@@ -17,10 +17,17 @@ const bannerRoutes = require('./routes/banner.routes');
 const uploadRoutes = require('./routes/upload.routes');
 const settingsRoutes = require('./routes/settings.routes');
 
-// Connect to MongoDB
-connectDB();
-
 const app = express();
+
+// Ensure DB is connected before handling any request (serverless-safe)
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    res.status(503).json({ error: 'Database unavailable. Please try again.' });
+  }
+});
 
 // CORS — allow localhost for dev + any Vercel deployment URL
 const allowedOrigins = [
