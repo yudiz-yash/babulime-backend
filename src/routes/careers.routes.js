@@ -1,7 +1,7 @@
 const express = require('express');
 const CareerPosition = require('../models/CareerPosition');
 const CareerApplication = require('../models/CareerApplication');
-const { uploadDoc } = require('../middleware/upload.middleware');
+const { uploadDoc, toBase64 } = require('../middleware/upload.middleware');
 const { protect } = require('../middleware/auth.middleware');
 
 const router = express.Router();
@@ -71,7 +71,7 @@ router.post('/applications', uploadDoc.single('resume'), async (req, res) => {
 
     const app = await CareerApplication.create({
       name, email, phone, position, experience, coverLetter,
-      resumeUrl: req.file ? `/uploads/${req.file.filename}` : null,
+      resumeUrl: req.file ? toBase64(req.file) : null,
       resumeOriginalName: req.file ? req.file.originalname : null,
     });
     res.status(201).json({ success: true, id: app._id });

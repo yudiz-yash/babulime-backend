@@ -1,21 +1,11 @@
 const multer = require('multer');
 const path = require('path');
-const fs = require('fs');
 
-// Memory storage for images (will be converted to base64)
+// Memory storage for images (converted to base64)
 const imageStorage = multer.memoryStorage();
 
-// Disk storage for documents (resumes etc.)
-const uploadDir = path.join(__dirname, '../../uploads');
-if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
-
-const docStorage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, uploadDir),
-  filename: (req, file, cb) => {
-    const unique = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    cb(null, unique + path.extname(file.originalname));
-  },
-});
+// Memory storage for documents too (Vercel has no persistent filesystem)
+const docStorage = multer.memoryStorage();
 
 const imageFilter = (req, file, cb) => {
   const allowed = /jpeg|jpg|png|gif|webp/;
@@ -42,7 +32,7 @@ const uploadImage = multer({
   limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
 });
 
-// Document upload → disk (resumes, etc.)
+// Document upload → memory (stored as base64 in MongoDB)
 const uploadDoc = multer({
   storage: docStorage,
   fileFilter: docFilter,
