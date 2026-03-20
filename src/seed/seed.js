@@ -173,6 +173,12 @@ async function seed() {
       badge: 'MANUFACTURING EXCELLENCE',
       heading: 'Manufacturing Excellence',
       description: 'Engineered for consistency and hygiene at every stage. All machinery fabricated using stainless steel for food safety compliance.',
+      subDescription: 'All machinery fabricated using stainless steel for food safety compliance.',
+      vision: {
+        heading: 'Our Vision',
+        desc1: 'To remain the most trusted name in food-grade lime processing by continuously enhancing manufacturing standards, operational systems and market reach.',
+        desc2: 'Committed to sustainable growth, process excellence and long-term distributor relationships.',
+      },
       steps: [
         { icon: 'Layers',      title: 'Raw Material Selection',   desc: 'Careful selection of materials to ensure baseline quality before processing begins.' },
         { icon: 'Droplets',    title: 'Cleaning & Pre-Processing', desc: 'Thorough removal of impurities and contaminants before main processing.' },
