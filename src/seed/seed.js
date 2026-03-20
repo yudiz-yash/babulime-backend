@@ -73,6 +73,12 @@ async function seed() {
       ],
       checkItems: ['Stainless Steel Processing', 'Ultra-Modern Laboratory', 'Hygienic Packaging', 'Batch Traceability'],
       statBadgeValue: '80K+', statBadgeLabel: 'Retail Outlets\nAcross India',
+      distributionNetwork: {
+        subHeading: 'Our Rich',
+        title: 'Distribution Network',
+        bullets: ['80,000+ Retail Outlets', '60+ Cities', 'Strong Gujarat Network', 'Growing Pan-India Access'],
+        description: 'Dependable availability and consistent retailer support across India.',
+      },
     });
     console.log('✅ About');
 

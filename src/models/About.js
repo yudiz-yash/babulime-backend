@@ -22,6 +22,12 @@ const aboutSchema = new mongoose.Schema({
   },
   statBadgeValue: { type: String, default: '80K+' },
   statBadgeLabel: { type: String, default: 'Retail Outlets\nAcross India' },
+  distributionNetwork: {
+    subHeading: { type: String, default: 'Our Rich' },
+    title: { type: String, default: 'Distribution Network' },
+    bullets: { type: [String], default: ['80,000+ Retail Outlets', '60+ Cities', 'Strong Gujarat Network', 'Growing Pan-India Access'] },
+    description: { type: String, default: 'Dependable availability and consistent retailer support across India.' },
+  },
 }, { timestamps: true });
 
 module.exports = mongoose.model('About', aboutSchema);
