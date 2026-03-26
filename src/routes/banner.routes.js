@@ -35,6 +35,19 @@ router.post('/', protect, async (req, res) => {
   }
 });
 
+// PUT /api/banner/reorder — protected
+router.put('/reorder', protect, async (req, res) => {
+  try {
+    const { ids } = req.body; // array of _id strings in desired order
+    if (!Array.isArray(ids)) return res.status(400).json({ error: 'ids must be an array.' });
+    await Promise.all(ids.map((id, index) => BannerSlide.findByIdAndUpdate(id, { order: index })));
+    const slides = await BannerSlide.find().sort('order');
+    res.json(slides);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // PUT /api/banner/:id — protected
 router.put('/:id', protect, async (req, res) => {
   try {
