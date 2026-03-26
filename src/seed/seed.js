@@ -207,7 +207,7 @@ async function seed() {
       heading: 'Quality & Compliance',
       description: 'Quality is non-negotiable. Every batch is laboratory tested before market release.',
       items: [
-        { icon: 'Award',       title: 'FSSAI Standards',              desc: 'Fully compliant with Food Safety and Standards Authority of India regulations.' },
+        { icon: 'Award',       title: 'FSSAI Standards',              desc: 'Fully compliant with Food Safety and Standards Authority of India regulations. FSSAI Lic. No.: 1001702100269' },
         { icon: 'ShieldCheck', title: 'Good Manufacturing Practices', desc: 'GMP protocols rigorously followed across all stages of production.' },
         { icon: 'CheckSquare', title: 'Internal Quality Assurance',   desc: 'Every batch is laboratory tested before market release.' },
         { icon: 'FileText',    title: 'ISO Certified Excellence',     desc: 'Certified under FSSAI and ISO 9001:2015 — meeting all national and international food safety requirements with zero compromise on quality.' },
