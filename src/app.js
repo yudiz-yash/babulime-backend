@@ -29,15 +29,11 @@ app.use(async (req, res, next) => {
   }
 });
 
-// CORS — allow localhost for dev + production domain
-const allowedOrigins = [
-  'http://localhost:3000',
-  'http://localhost:5173',
-  'http://localhost:3001',
-];
+// CORS — allow localhost (any port) for dev + production domains
+const allowedOrigins = [];
 
 // Allow any origins from env var
-// On cPanel set: ALLOWED_ORIGINS=https://yourdomain.com,https://www.yourdomain.com
+// In Vercel backend env vars set: ALLOWED_ORIGINS=https://yourdomain.com,https://www.yourdomain.com
 if (process.env.ALLOWED_ORIGINS) {
   process.env.ALLOWED_ORIGINS.split(',').forEach(o => allowedOrigins.push(o.trim()));
 }
@@ -46,9 +42,12 @@ app.use(cors({
   origin: (origin, callback) => {
     // Allow requests with no origin (mobile apps, curl, server-to-server)
     if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) return callback(null, true);
+    // Allow any localhost port (dev / local preview)
+    if (/^https?:\/\/localhost(:\d+)?$/.test(origin)) return callback(null, true);
     // Allow any *.vercel.app domain
     if (/\.vercel\.app$/.test(origin)) return callback(null, true);
+    // Allow explicitly listed production domains
+    if (allowedOrigins.includes(origin)) return callback(null, true);
     callback(new Error('CORS not allowed'));
   },
   credentials: true,
